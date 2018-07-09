@@ -17,11 +17,11 @@ This plugin includes the functionality of redmine_thumbnail_pdf
 
 ### Uninstall
 
-2. go to plugins folder
+1. go to plugins folder
 
 `rm -r redmine_preview_pdf`
 
-3. restart server f.i.  `sudo /etc/init.s/apache2 restart`
+2. restart server f.i.  `sudo /etc/init.s/apache2 restart`
 
 ### Use
 
