@@ -29,7 +29,7 @@ This plugin includes the functionality of redmine_thumbnail_pdf
 
 * Go to Administration->Settings->Display and choose "Display attachment thumbnails"
 * Go to issues and view your pdf attachments as thumbnailable images
-* On Issue show page click on a pdf attachmen to to view the first page of the pdf - good for large pdf files
+* On Issue show page click on a pdf attachment to to view the first page of the pdf - good for large pdf files
 
 **Have fun!**
 
