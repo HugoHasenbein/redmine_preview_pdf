@@ -39,4 +39,8 @@ This plugin includes the functionality of redmine_thumbnail_pdf
 
 ### Change-Log* 
 
+**1.0.2** Moved parts of code to enhance compatibility with other plugins
+- Separeted functionality from All Thumbnails
+- Separated functionality from Redmine Thumbnail PDF
+
 **1.0.1** Running on Redmine 3.4.6

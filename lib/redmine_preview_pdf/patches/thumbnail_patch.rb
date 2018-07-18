@@ -28,22 +28,23 @@ module RedminePreviewPdf
         base.class_eval do
 
           unloadable 	
+          
           # for those, who read and analyze code: I haven't figured it out yet how to unset 
           # a constant and how to patch a function, which has been defined as self.function()
           # in a base.class_eval block
           #
-		  @REDMINE_THUMBNAIL_PDF_CONVERT_BIN = (Redmine::Configuration['imagemagick_convert_command'] || 'convert').freeze
-		  @REDMINE_THUMBNAIL_PDF_ALLOWED_TYPES_WITH_PDF = %w(image/bmp image/gif image/jpeg image/png application/pdf)
+		  @REDMINE_PREVIEW_PDF_CONVERT_BIN = (Redmine::Configuration['imagemagick_convert_command'] || 'convert').freeze
+		  @REDMINE_PREVIEW_PDF_ALLOWED_TYPES = %w(application/pdf)
 
 		  # Generates a thumbnail for the source image to target
-		  def self.generate(source, target, size)
+		  def self.generate_preview_pdf(source, target, size)
 
 			return nil unless convert_available?
 
 			unless File.exists?(target)
 
 			  mime_type = ""
-			  unless File.open(source) {|f| mime_type = MimeMagic.by_magic(f).try(:type); @REDMINE_THUMBNAIL_PDF_ALLOWED_TYPES_WITH_PDF.include? mime_type }
+			  unless File.open(source) {|f| mime_type = MimeMagic.by_magic(f).try(:type); @REDMINE_PREVIEW_PDF_ALLOWED_TYPES.include? mime_type }
 				return nil
 			  end
 
@@ -54,10 +55,10 @@ module RedminePreviewPdf
 				FileUtils.mkdir_p directory
 			  end
 			  size_option = "#{size}x#{size}>"
-			  cmd = "#{shell_quote @REDMINE_THUMBNAIL_PDF_CONVERT_BIN} #{shell_quote source}#{page_num} #{background_switch} -thumbnail #{shell_quote size_option} #{shell_quote target}"
+			  cmd = "#{shell_quote @REDMINE_PREVIEW_PDF_CONVERT_BIN} #{shell_quote source}#{page_num} #{background_switch} -thumbnail #{shell_quote size_option} #{shell_quote target}"
 
 			  unless system(cmd)
-				logger.error("Creating thumbnail failed (#{$?}):\nCommand: #{cmd}")
+				logger.error("Creating preview failed (#{$?}):\nCommand: #{cmd}")
 				return nil
 			  end
 			end

@@ -23,13 +23,41 @@ module RedminePreviewPdf
   module Patches
     module AttachmentsControllerPatch
       def self.included(base)
+        base.extend(ClassMethods)
         base.send(:include, InstanceMethods)
 
         base.class_eval do
           unloadable
             
-          alias_method_chain   :show, :pdf
+          alias_method_chain     :show, :pdf
+         
+          alias_method           :find_attachment_for_preview, :find_attachment
+          before_action          :find_attachment_for_preview, :only => [:preview_pdf]
 
+
+		  def preview_pdf
+			if @attachment.is_pdf? && preview = @attachment.preview_pdf(:size => params[:size])
+			  if stale?(:etag => preview)
+				#
+				# thumbnail file formats are not necessarily identical to their attachment file formats
+				# anymore - therefore, we must check individually, which file format the thumbnail has
+				#
+				mime_type = ""
+				File.open(preview) {|f| mime_type = MimeMagic.by_magic(f).try(:type) }
+				preview_filename   = File.basename(@attachment.filename, File.extname(@attachment.filename))
+				preview_filename  += Rack::Mime::MIME_TYPES.invert[mime_type] 
+
+				send_file preview,
+				  :filename => filename_for_content_disposition( preview_filename ),
+				  :type => mime_type,
+				  :disposition => 'inline'
+			  end
+			else
+			  # No thumbnail for the attachment or thumbnail could not be created
+			  head 404
+			end
+		  end #def
+ 
         end #base
         
       end #self
@@ -52,7 +80,10 @@ module RedminePreviewPdf
         
         end #def 
 
-      end #module      
+      end #module  
+      
+      module ClassMethods      
+      end #module    
 
     end #module
   end #module

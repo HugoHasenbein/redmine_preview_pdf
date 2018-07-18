@@ -29,11 +29,11 @@ module RedminePreviewPdf
           unloadable 
           
 		 def preview_pdf_tag(attachment, options={})
-		   _size = options.delete(:size) || 800
+		   _size = options.delete(:size) || 1600
 		   image_tag(
-			   thumbnail_path(attachment, :size => _size),
-			   { :class => "thumbnail",
-			     :srcset => "#{thumbnail_path(attachment, :size => _size * 2)} 2x",
+			   preview_pdf_path(attachment, :size => _size),
+			   { :class => "preview",
+			     :srcset => "#{preview_pdf_path(attachment, :size => _size * 2)} 2x",
 			     :style => "max-width: #{_size}px; max-height: #{_size}px; height: #{_size}px;",
                  :title => attachment.filename
 			    }.merge(options)

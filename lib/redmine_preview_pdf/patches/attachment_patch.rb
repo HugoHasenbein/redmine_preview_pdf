@@ -23,25 +23,46 @@ module RedminePreviewPdf
   module Patches
     module AttachmentPatch
       def self.included(base)
+        base.extend(ClassMethods)
         base.send(:include, InstanceMethods)
         base.class_eval do
           unloadable
           
-          alias_method_chain 'is_image?', 'pdf'         
+
+          # Returns the full path the attachment pdf preview, or nil
+          # if the preview cannot be generated.
+          def preview_pdf(options={})
+            if is_pdf? && readable?
+              size = options[:size].to_i
+              if size > 0
+                # Limit the number of previews per image
+                size = (size / 50) * 50
+                # Maximum preview size
+                size = 1600 if size > 1600
+              else
+                size = Setting.thumbnails_size.to_i
+              end
+              size = 100 unless size > 0
+              target = File.join(self.class.thumbnails_storage_path, "#{id}_#{digest}_#{size}.png")
+
+              begin
+                Redmine::Thumbnail.generate_preview_pdf(self.diskfile, target, size)
+              rescue => e
+                logger.error "An error occured while generating preview for #{disk_filename} to #{target}\nException was: #{e.message}" if logger
+                return nil
+              end
+            end
+          end #def
 
         end #base
       end #def
 
-       module InstanceMethods
-       
-	     def is_image_with_pdf?
-	       
-	       is_image_without_pdf? || Redmine::MimeType.of(filename) == "application/pdf"
-	       
-	     end #def
-	     
-	       
-       end #def      
+       module InstanceMethods        
+       end #module      
+
+       module ClassMethods
+       end #module
+
     end
   end  
 end

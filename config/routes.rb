@@ -19,14 +19,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-Redmine::Plugin.register :redmine_preview_pdf do
-  name 'Redmine Preview PDF'
-  author 'Stephan Wenzel'
-  description 'This is a plugin for Redmine to preview a pdf attachment file'
-  version '1.0.2'
-  url 'https://github.com/HugoHasenbein/redmine_preview_pdf'
-  author_url 'https://github.com/HugoHasenbein/redmine_preview_pdf'
+RedmineApp::Application.routes.draw do
+
+    get 'attachments/preview_pdf/:id(/:size)', :to => 'attachments#preview_pdf', :id => /\d+/, :size => /\d+/, :as => 'preview_pdf'
 
 end
-
-require "redmine_preview_pdf"
