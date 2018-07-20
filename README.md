@@ -1,7 +1,6 @@
 # redmine_preview_pdf
 
-Plugin for Redmine. Show pdf attachments in preview pane. Also will show pdf thumbnails.
-This plugin includes the functionality of redmine_thumbnail_pdf
+Plugin for Redmine. Show pdf attachments in preview pane. For multi page pdf, the first page is shown.
 
 ![PNG that represents a quick overview](/doc/Overview.png)
 
