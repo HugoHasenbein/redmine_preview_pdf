@@ -1,6 +1,6 @@
 # redmine_preview_pdf
 
-Plugin for Redmine. Show pdf attachments in preview pane. 
+Plugin for Redmine. Show pdf attachments in preview pane. Also will show pdf thumbnails.
 This plugin requires imagemagick and ghostscript to be installed
 
 ![PNG that represents a quick overview](/doc/Overview.png)
@@ -11,9 +11,7 @@ This plugin requires imagemagick and ghostscript to be installed
 
 ### Install
 
-1. go to plugins folder
-
-`git clone https://github.com/HugoHasenbein/redmine_preview_pdf.git`
+1. download plugin and copy plugin folder redmine_preview_pdf go to Redmine's plugins folder 
 
 2. restart server f.i.  
 
@@ -21,7 +19,7 @@ This plugin requires imagemagick and ghostscript to be installed
 
 ### Uninstall
 
-1. go to plugins folder
+1. go to plugins folder, delete plugin folder redmine_preview_pdf
 
 `rm -r redmine_preview_pdf`
 
