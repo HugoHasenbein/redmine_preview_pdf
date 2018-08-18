@@ -22,10 +22,17 @@
 Rails.configuration.to_prepare do
 
 
-  # link patches
+  # link patches - model patches
   require 'redmine_preview_pdf/patches/attachment_patch'
+
+  # link patches - helper patches
   require 'redmine_preview_pdf/patches/application_helper_patch'
+
+  # link patches - controller patches
   require 'redmine_preview_pdf/patches/attachments_controller_patch'
+  require 'redmine_preview_pdf/patches/admin_controller_patch'
+  
+  # link patches - library/core plugin patchges
   require 'redmine_preview_pdf/patches/thumbnail_patch'
 
 end

@@ -33,7 +33,8 @@ module RedminePreviewPdf
           # a constant and how to patch a function, which has been defined as self.function()
           # in a base.class_eval block
           #
-		  @REDMINE_PREVIEW_PDF_CONVERT_BIN = (Redmine::Configuration['imagemagick_convert_command'] || 'convert').freeze
+          @REDMINE_PREVIEW_PDF_GS_BIN        = 'gs'.freeze
+		  @REDMINE_PREVIEW_PDF_CONVERT_BIN   = (Redmine::Configuration['imagemagick_convert_command'] || 'convert').freeze
 		  @REDMINE_PREVIEW_PDF_ALLOWED_TYPES = %w(application/pdf)
 
 		  # Generates a thumbnail for the source image to target
@@ -65,6 +66,13 @@ module RedminePreviewPdf
 			target
 		  end #def 
 		                     
+		  def self.gs_available?
+			return @gs_available if defined?(@gs_available)
+			@gs_available = system("#{shell_quote @REDMINE_PREVIEW_PDF_GS_BIN} -version") rescue false
+			logger.warn("Imagemagick's delegate (#{@REDMINE_PREVIEW_PDF_GS_BIN}) not available") unless @gs_available
+			@gs_available
+		  end
+
         end #base
       end #self
 

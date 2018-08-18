@@ -29,16 +29,55 @@ module RedminePreviewPdf
           unloadable 
           
 		 def preview_pdf_tag(attachment, options={})
-		   _size = options.delete(:size) || 1600
-		   image_tag(
-			   preview_pdf_path(attachment, :size => _size),
-			   { :class => "preview",
-			     :srcset => "#{preview_pdf_path(attachment, :size => _size * 2)} 2x",
-			     :style => "max-width: #{_size}px; max-height: #{_size}px; height: #{_size}px;",
-                 :title => attachment.filename
-			    }.merge(options)
-		   )
-		 end                      
+		 
+            case Setting['plugin_redmine_preview_pdf']['pdf_embedding'].to_i
+            
+              when 0
+                content_tag(:div, 
+							 content_tag(
+								 :object,
+								 tag(:embed, :href => download_named_attachment_path(attachment, attachment.filename), :type => "application/pdf", :onload  => "resizeObject(this);"),
+								 { :style   => "position:absolute;top:0;left:0;width:95%;height:100%;",
+								   :title   => attachment.filename,
+								   :type    => "application/pdf",
+								   :data    => download_named_attachment_path(attachment, attachment.filename),
+								   :onload  => "resizeObject(this);"
+								  }.merge(options)
+							 ),
+							 :style => "position:relative;padding-top:141%;"
+                )
+              when 1
+                content_tag(:div, 
+							 content_tag(
+								 :iframe,
+								 "",
+								 { :style                => "position:absolute;top:0;left:0;width:100%;height:100%;",
+								   :seamless             => "seamless",
+								   :scrolling            => "no",
+								   :frameborder          => "0",
+								   :allowtransparency    => "true",
+								   :title                => attachment.filename,
+								   :src                  => download_named_attachment_path(attachment, attachment.filename),
+								   :onload               => "resizeObject(this);"
+								  }.merge(options)
+							 ),
+							 :style => "position:relative;padding-top:141%;"
+                )
+              else
+				_size = options.delete(:size) || 1600
+				image_tag(
+					preview_pdf_path(attachment, :size => _size),
+					{ :class => "preview",
+					  :srcset => "#{preview_pdf_path(attachment, :size => _size * 2)} 2x",
+					  :style => "max-width: #{_size}px; max-height: #{_size}px; height: #{_size}px;",
+					  :title => attachment.filename
+					 }.merge(options)
+				)
+				
+		   end #case
+		   
+		 end #def
+		                    
         end #base
       end #self
 
