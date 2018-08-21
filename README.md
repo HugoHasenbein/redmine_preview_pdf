@@ -30,9 +30,12 @@ This plugin requires imagemagick and ghostscript to be installed
 ### Use
 
 * Go to Administration->Information and verify if ImageMagick and Ghostscript are installed
+
   (ImageMagick and Ghostscript are only needed, if you choose to preview a pdf file as an image)
+  
   GhostScript 'gs' and ImagMagick 'convert' should be available in the path of the Redmine 
   process user
+  
 * Go to Administration->Plugins-Redmine Preview PDF->Configure and choose your preview method
 
   `<object><embed>` downloads the whole pdf. Should be compatible with elder browsers
