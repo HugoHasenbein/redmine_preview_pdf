@@ -30,9 +30,14 @@ This plugin requires imagemagick and ghostscript to be installed
 ### Use
 
 * Go to Administration->Information and verify if ImageMagick and Ghostscript are installed
-* Go to Administration->Settings->Display and choose "Display attachment thumbnails"
-* Go to issues and view your pdf attachments as thumbnailable images
-* On Issue show page click on a pdf attachmen to to view -depending on your choice-
+  (ImageMagick and Ghostscript are only needed, if you choose to preview a pdf file as an image)
+  GhostScript 'gs' and ImagMagick 'convert' should be available in the path of the Redmine 
+  process user
+* Go to Administration->Plugins-Redmine Preview PDF->Configure and choose your preview method
+  <object><embed> downloads the whole pdf. Should be compatible with elder browsers
+  <iframe> downloads the whole pdf as well. Should be compatible with newer browsers
+  <img> only shows the first page of the pdf as an image. Compatible with every browser
+* On Issue show page click on a pdf attachment to to view -depending on your choice-
   * the first page of the pdf as an image - good for large pdf files
   * the whole pdf embedded
 
