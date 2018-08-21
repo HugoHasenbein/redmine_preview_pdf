@@ -34,9 +34,13 @@ This plugin requires imagemagick and ghostscript to be installed
   GhostScript 'gs' and ImagMagick 'convert' should be available in the path of the Redmine 
   process user
 * Go to Administration->Plugins-Redmine Preview PDF->Configure and choose your preview method
-  '<object>''<embed>' downloads the whole pdf. Should be compatible with elder browsers
-  <iframe> downloads the whole pdf as well. Should be compatible with newer browsers
-  <img> only shows the first page of the pdf as an image. Compatible with every browser
+
+  `<object><embed>` downloads the whole pdf. Should be compatible with elder browsers
+  
+  `<iframe>` downloads the whole pdf as well. Should be compatible with newer browsers
+  
+  `<img>` shows only the first page of the pdf as an image. Compatible with every browser
+  
 * On Issue show page click on a pdf attachment to to view -depending on your choice-
   * the first page of the pdf as an image - good for large pdf files
   * the whole pdf embedded
