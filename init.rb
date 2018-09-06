@@ -19,13 +19,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+# **1.0.4** fixed aspect ratio problem for img preview
+# **1.0.3** cleaned code - never published
+# **1.0.2** 
+#  - added check for Ghostscript
+#  - added option to show full original pdf embedded in preview pane
+#  - added option how to embed pdf in preview pane with `<object><embed>` or `<iframe>`-tags
+# **1.0.1** running on Redmine 3.4.6
+
 require 'redmine'
 
 Redmine::Plugin.register :redmine_preview_pdf do
   name 'Redmine Preview PDF'
   author 'Stephan Wenzel'
   description 'This is a plugin for Redmine to preview a pdf attachment file'
-  version '1.0.3'
+  version '1.0.4'
   url 'https://github.com/HugoHasenbein/redmine_preview_pdf'
   author_url 'https://github.com/HugoHasenbein/redmine_preview_pdf'
 

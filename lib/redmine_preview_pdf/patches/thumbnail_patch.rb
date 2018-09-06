@@ -55,7 +55,8 @@ module RedminePreviewPdf
 			  unless File.exists?(directory)
 				FileUtils.mkdir_p directory
 			  end
-			  size_option = "#{size}x#{size}>"
+			  size_option = "#{size}"
+
 			  cmd = "#{shell_quote @REDMINE_PREVIEW_PDF_CONVERT_BIN} #{shell_quote source}#{page_num} #{background_switch} -thumbnail #{shell_quote size_option} #{shell_quote target}"
 
 			  unless system(cmd)

@@ -54,6 +54,7 @@ This plugin requires imagemagick and ghostscript to be installed
 
 ### Localisations
 
+ *1.0.4 fixed aspect ratio problem for img preview
 * 1.0.3 
   - added option to embed original pdf instead of only first page
   - added check for Ghostscript availabilty under Administration->Information
@@ -66,8 +67,9 @@ This plugin requires imagemagick and ghostscript to be installed
 
 ### Change-Log* 
 
+**1.0.3** fixed aspect ratio problem for img preview
 **1.0.2** 
  - added check for Ghostscript
  - added option to show full original pdf embedded in preview pane
  - added option how to embed pdf in preview pane with `<object><embed>` or `<iframe>`-tags
-**1.0.1** Running on Redmine 3.4.6
+**1.0.1** running on Redmine 3.4.6

@@ -69,7 +69,7 @@ module RedminePreviewPdf
 					preview_pdf_path(attachment, :size => _size),
 					{ :class => "preview",
 					  :srcset => "#{preview_pdf_path(attachment, :size => _size * 2)} 2x",
-					  :style => "max-width: #{_size}px; max-height: #{_size}px; height: #{_size}px;",
+					  :style => "max-width: #{_size}px;",
 					  :title => attachment.filename
 					 }.merge(options)
 				)
