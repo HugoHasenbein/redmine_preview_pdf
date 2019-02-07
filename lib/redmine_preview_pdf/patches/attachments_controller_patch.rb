@@ -28,8 +28,9 @@ module RedminePreviewPdf
 
         base.class_eval do
           unloadable
-            
-          alias_method_chain     :show, :pdf
+
+          alias_method :show_without_pdf, :show
+          alias_method :show, :show_with_pdf
          
           alias_method           :find_attachment_for_preview, :find_attachment
           before_action          :find_attachment_for_preview, :only => [:preview_pdf]
