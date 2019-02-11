@@ -75,6 +75,7 @@ module RedminePreviewPdf
                 rendered = true
               end
             }
+            format.api
           end
           
           show_without_pdf unless rendered 
