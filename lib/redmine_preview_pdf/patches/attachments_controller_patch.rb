@@ -28,8 +28,9 @@ module RedminePreviewPdf
 
         base.class_eval do
           unloadable
-            
-          alias_method_chain     :show, :pdf
+
+          alias_method :show_without_pdf, :show
+          alias_method :show, :show_with_pdf
          
           alias_method           :find_attachment_for_preview, :find_attachment
           before_action          :find_attachment_for_preview, :only => [:preview_pdf]
@@ -43,7 +44,7 @@ module RedminePreviewPdf
 				# anymore - therefore, we must check individually, which file format the thumbnail has
 				#
 				mime_type = ""
-				File.open(preview) {|f| mime_type = MimeMagic.by_magic(f).try(:type) }
+				File.open(preview) {|f| mime_type = Marcel::MimeType.for(f)}
 				preview_filename   = File.basename(@attachment.filename, File.extname(@attachment.filename))
 				preview_filename  += Rack::Mime::MIME_TYPES.invert[mime_type] 
 
@@ -74,6 +75,7 @@ module RedminePreviewPdf
                 rendered = true
               end
             }
+            format.api
           end
           
           show_without_pdf unless rendered 

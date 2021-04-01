@@ -28,8 +28,9 @@ module RedminePreviewPdf
 
         base.class_eval do
           unloadable
-            
-          alias_method_chain :info, :gs_for_preview_pdf
+
+          alias_method :info_without_gs_for_preview_pdf, :info
+          alias_method :info, :info_with_gs_for_preview_pdf
           
         end #base
         
