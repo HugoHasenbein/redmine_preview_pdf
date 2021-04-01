@@ -44,7 +44,7 @@ module RedminePreviewPdf
 				# anymore - therefore, we must check individually, which file format the thumbnail has
 				#
 				mime_type = ""
-				File.open(preview) {|f| mime_type = MimeMagic.by_magic(f).try(:type) }
+				File.open(preview) {|f| mime_type = Marcel::MimeType.for(f)}
 				preview_filename   = File.basename(@attachment.filename, File.extname(@attachment.filename))
 				preview_filename  += Rack::Mime::MIME_TYPES.invert[mime_type] 
 
