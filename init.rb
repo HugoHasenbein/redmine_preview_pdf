@@ -33,7 +33,7 @@ Redmine::Plugin.register :redmine_preview_pdf do
   name 'Redmine Preview PDF'
   author 'Stephan Wenzel'
   description 'This is a plugin for Redmine to preview a pdf attachment file'
-  version '1.1.4'
+  version '1.0.5'
   url 'https://github.com/HugoHasenbein/redmine_preview_pdf'
   author_url 'https://github.com/HugoHasenbein/redmine_preview_pdf'
 
