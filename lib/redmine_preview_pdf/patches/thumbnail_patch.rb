@@ -45,7 +45,7 @@ module RedminePreviewPdf
 			unless File.exists?(target)
 
 			  mime_type = ""
-			  unless File.open(source) {|f| mime_type = MimeMagic.by_magic(f).try(:type); @REDMINE_PREVIEW_PDF_ALLOWED_TYPES.include? mime_type }
+			  unless File.open(source) {|f| mime_type = Marcel::MimeType.for(f); @REDMINE_PREVIEW_PDF_ALLOWED_TYPES.include? mime_type }
 				return nil
 			  end
 
